@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 public class GameScript : MonoBehaviour
 {
@@ -10,8 +10,10 @@ public class GameScript : MonoBehaviour
     public Rigidbody2D rb;
     public float speed = 5;
 
-    public TextMeshProUGUI playerOneScoreTxt;
-    public TextMeshProUGUI playerTwoScoreTxt;
+    public Text playerOneScoreTxt;
+    public Text playerTwoScoreTxt;
+    public Text timer;
+    public GameObject timerObject;
 
     public int playerOneScore = 0;
     public int playerTwoScore = 0;
@@ -19,12 +21,13 @@ public class GameScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Launch();
+        Cursor.visible = false;
+        StartCoroutine(StartGame());
         SetScore();
     }
 
     void FixedUpdate()
-    {
+    { 
         if (transform.position.x > maxX)
         {
             ResetGame();
@@ -59,8 +62,16 @@ public class GameScript : MonoBehaviour
 
     private IEnumerator StartGame()
     {
+        timerObject.SetActive(true);
         Debug.Log("Start");
-        yield return new WaitForSeconds(2);
+        timer.text = "3";
+        yield return new WaitForSeconds(1);
+        timer.text = "2";
+        yield return new WaitForSeconds(1);
+        timer.text = "1";
+        yield return new WaitForSeconds(1);
+        timer.text = "0";
+        timerObject.SetActive(false);
         Launch();
         Debug.Log("End");
     }
