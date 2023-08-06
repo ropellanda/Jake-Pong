@@ -9,4 +9,12 @@ public class SwitchScene : MonoBehaviour
     {
         SceneManager.LoadScene(scene);
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            StartGame("GameView");
+        }
+    }
 }
